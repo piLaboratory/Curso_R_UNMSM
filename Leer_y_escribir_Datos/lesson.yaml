@@ -1,10 +1,70 @@
 - Class: meta
-  Course: Programando en R
-  Lesson: Mirando en los Datos
-  Author: Nick Carchedi
+  Course: Análisis y visualización de datos biológicos con R
+  Lesson: Leer y escribir datos
+  Author: Paulo Inácio Prado, a partir de leciones de Nick Carchedi y José R Sosa,
   Type: Standard
-  Organization: JHU Biostat
-  Version: 2.2.11
+  Organization: Universidade de São Paulo
+  Version: 1.0.0
+
+- Class: text
+  Output: "Esta lección es una combinación con modificaciones de las lecciones 'Leer y Escribir Datos'  del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r)", y del curso 'R Programming' traducida al castellano por José R Sosa (https://github.com/josersosa/Programando_en_R).
+
+- Class: text
+  Output: En esta lección aprenderemos a leer conjuntos de datos en R. También aprenderemos a realizar una primera inspección de los datos.
+
+- Class: text
+  Output: 'R puede importar conjuntos de datos desde archivos de texto, otros
+  softwares de estadística y hasta hojas de cálculo. Puedes leer archivos de datos que hayas descargado en tu computadora o directamente de Internet.'
+
+- Class: cmd_question
+  Output: Empezamos con los archivos de datos en texto.  Vamos descargar un archivo de datos del sitio de nuestro curso. Primero crea un objeto con la url para descargar. Escribe url1 <- "https://pilaboratory.github.io/R_UNMSM/data/usda_plant_data.csv"
+  CorrectAnswer: url1 <- "https://pilaboratory.github.io/R_UNMSM/data/usda_plant_data.csv"
+  AnswerTests: omnitest(correctExpr='url1 <- "https://pilaboratory.github.io/R_UNMSM/data/usda_plant_data.csv"')
+  Hint: Copia url1 <- "https://pilaboratory.github.io/R_UNMSM/data/usda_plant_data.csv" y pégalo en la línea de comando.
+
+- Class: cmd_question
+  Output: Ahora descargue el archivo en su directorio de trabajo con download.file(url = url1, destfile = "usda_plant_data.csv") 
+  CorrectAnswer: download.file(url = url1, destfile = "usda_plant_data.csv") 
+  AnswerTests: omnitest(correctExpr='download.file(url = url1, destfile = "usda_plant_data.csv")')
+  Hint: Copia download.file(url = url1, destfile = "usda_plant_data.csv")  y pégalo en la línea de comando.
+
+- Class: text
+  Output: 'La mayoría de los archivos que contienen información tienen un
+  formato similar. Generalmente cada línea del archivo representa una
+  observación o registro, por lo que cada línea contiene un conjunto de
+  diferentes variables asociadas con la observación.'
+
+- Class: text
+  Output: 'En los archivos de datos em texto, diferentes variables son separadas por un carácter especial,
+  llamado delimitador. Otra veces las variables son diferenciadas por
+  su ubicación en cada línea.'
+
+- Class: text
+  Output: 'El separador de números decimales (punto o coma en general) y la existencia o no de nombres de variables son otras cosas a las que debe prestar atención en estos archivos.
+'
+
+- Class: cmd_question
+  Output: Echemos un vistazo al archivo que acabamos de descargar. Escriba file.edit("usda_plant_data.csv"). 
+  CorrectAnswer: file.edit("usda_plant_data.csv")
+  AnswerTests: omnitest(correctExpr='file.edit("usda_plant_data.csv")')
+  Hint: Escriba file.edit("usda_plant_data.csv") en la linea de comando y pulse intro.
+
+- Class: text
+  Output: RStudio debe abrir el archivo en la ventana del editor de archivos, que normalmente está encima de la ventana de la consola de R. Podemos ver que el valor de cada campo está encerrado entre comillas dobles.
+
+- Class: mult_question
+  Output: ¿Cuál es el delimitador de campo en este archivo?
+  AnswerChoices: Coma;punto y coma;punto;espacio
+  CorrectAnswer: Coma
+  AnswerTests: omnitest(correctVal='coma')
+  Hint: Mira lo que hay entre los campos de valores.
+
+- Class: mult_question
+  Output: ¿Qué hay en la primera línea del archivo?
+  AnswerChoices: datos;nombres de variables;nombre del fichero
+  CorrectAnswer: nombres de variables
+  AnswerTests: omnitest(correctVal='nombres de variables')
+  Hint: Mira lo esta entre los campos de valores.
 
 - Class: text
   Output: Cada vez que usted está trabajando con un nuevo conjunto de datos, lo primero que debe hacer es mirarlo! ¿Cuál es el formato de los datos? ¿Cuáles son las dimensiones? ¿Cuáles son los nombres de las variables? ¿Cómo se almacenan las variables? ¿Existen datos que faltan? ¿Hay errores en los datos?
