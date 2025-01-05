@@ -90,10 +90,10 @@
 - Class: cmd_question
   Output: "También puedes usar enteros negativos para obtener un vector que
   consista en todos los elementos, excepto los elementos especificados. Excluye
-  los elementos 9:15, al especificar -9:-15."
-  CorrectAnswer: mi_vector[-9:-15]
-  AnswerTests: any_of_exprs('mi_vector[-9:-15]', 'mi_vector[c(-9:-15)]', 'mi_vector[-15:-9]', 'mi_vector[c(-15:-9)]')
-  Hint: "Introduce mi_vector[-9:-15] en la línea de comandos."
+  los elementos 9:15, al especificar -(9:15)."
+  CorrectAnswer: mi_vector[-(9:15)]
+  AnswerTests: any_of_exprs('mi_vector[-9:-15]', 'mi_vector[-(9:15)]', 'mi_vector[-15:-9]', 'mi_vector[-(15:9)]')
+  Hint: "Introduce mi_vector[-(9:15)] en la línea de comandos."
 
 - Class: text
   Output: 'Como alternativa a indexar con un vector de enteros, puedes indexar a
@@ -131,10 +131,10 @@
   AnswerTests: omnitest(correctExpr='mi_vector > 20')
 
 - Class:  cmd_question
-  Output: "Y ahora indexa 'mi_vector' usando el vector previamente calculado.
-  Ingresa  mi_vector[(mi_vector > 20)] en la línea de comandos."
-  CorrectAnswer: mi_vector[(mi_vector > 20)]
-  AnswerTests: omnitest(correctExpr='mi_vector[(mi_vector > 20)]')
+  Output: "Y ahora indexa 'mi_vector' usando el vector previamente calculado."
+  CorrectAnswer: mi_vector[mi_vector > 20]
+  AnswerTests: omnitest(correctExpr='mi_vector[mi_vector > 20]')
+  Hint: Ingresa mi_vector[(mi_vector > 20)] en la línea de comandos.
 
 - Class: text
   Output: 'También puedes usar esta notación para extraer partes de una
@@ -258,14 +258,7 @@
   AnswerTests: omnitest(correctExpr='carro[["marca"]]')
 
 - Class:  cmd_question
-  Output: 'Hasta puedes indexar por nombre parcial usando la opción exact=FALSE.
-  Ingresa carro[["mar",exact=FALSE]] en la línea de comandos.'
-  CorrectAnswer: carro[["mar",exact=FALSE]]
-  AnswerTests: omnitest(correctExpr='carro[["mar",exact=FALSE]]')
-
-- Class:  cmd_question
-  Output: 'Ahora crea la  siguiente lista: camioneta <- list(color="azul",
-  nllantas=4, marca= "BMW", ncilindros=6).'
+  Output: 'Ahora crea la  siguiente lista: camioneta <- list(color="azul", nllantas=4, marca= "BMW", ncilindros=6).'
   CorrectAnswer: camioneta <- list(color="azul", nllantas=4, marca= "BMW", ncilindros=6)
   AnswerTests: omnitest(correctExpr='camioneta <- list(color="azul", nllantas=4, marca= "BMW", ncilindros=6)')
 
@@ -341,9 +334,9 @@
 
 - Class: cmd_question
   Output: 'Ahora muestre el dataframe cars con sólo las filas que tienen una distancia de frenado mayor que la distancia media del conjunto de datos. Muestra todas las columnas del marco de datos'
-  CorrectAnswer: cars[cars$dist>mean(car$dist),]
-  AnswerTests: omnitest('cars[cars$dist>mean(car$dist),]')
-  Hint: La prueba logica que debes utilizar en la indexación de las lineas es cars$dist>mean(car$dist).
+  CorrectAnswer: cars[cars$dist>mean(cars$dist),]
+  AnswerTests: omnitest('cars[cars$dist>mean(cars$dist),]')
+  Hint: La prueba logica que debes utilizar en la indexación de las lineas es cars$dist>mean(cars$dist).
 
 - Class: text
   Output: 'Has terminado esa lección. Ahora ya sabes cómo acceder a las estructuras de datos.'
