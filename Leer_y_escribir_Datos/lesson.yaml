@@ -53,35 +53,33 @@
   Output: 'RStudio debe abrir el archivo en la ventana del editor de archivos, que normalmente está encima de la ventana de la consola de R. Podemos ver que el valor de cada campo está encerrado entre comillas dobles. Vemos también que los valores faltantes están como dos comillas dobles en secuencia ("").'
 
 - Class: mult_question
-  Output: ¿Cuál es el delimitador de campo en este archivo?
-  AnswerChoices: coma;punto y coma;punto;espacio
+  Output: "¿Cuál es el delimitador de campo en este archivo?"
   CorrectAnswer: coma
+  AnswerChoices: coma; punto-coma; punto; espacio;
   AnswerTests: omnitest(correctVal='coma')
   Hint: Mira lo que hay entre los campos de valores.
 
 - Class: mult_question
   Output: ¿Qué hay en la primera línea del archivo?
-  AnswerChoices: datos;nombres de variables;nombre del fichero
+  AnswerChoices: datos; nombres de variables; nombre del fichero;
   CorrectAnswer: nombres de variables
   AnswerTests: omnitest(correctVal='nombres de variables')
   Hint: Compare los campos de la primera línea con los de las líneas siguientes.
 
 - Class: cmd_question
-  Output: Agora já sabemos o que precisamos para importar o arquivo para o R. A função para fazer isso é read.table. é uma função com muitos argumentos, o que confere muita flexibilidade para ler diferentes tipos de dados. Em nosso caso precisamos especificar que el primer renglón contiene los nombres de la columnas (header=TRUE) y sep para especificar el delimitador (sep=","). Ingresa plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings = "") 
+  Output: Ahora ya sabemos lo que necesitamos para importar el archivo a R. La función para hacerlo es read.table. Es una función con muchos argumentos, lo que le da mucha flexibilidad para leer distintos tipos de datos. En nuestro caso, necesitamos especificar que el primer renglón contiene los nombres de la columnas (header=TRUE), sep para especificar el delimitador (sep=",") y que el string que represent valores faltantes (na.strings=""). Ingresa plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings = "") 
   CorrectAnswer: plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings="")
   AnswerTests: omnitest(correctExpr='plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings="")')
   Hint: Ingresa plants <- read.table("usda_plant_data.csv", header=TRUE, sep="," , na.strings="")  y pulse intro.
 
 - Class: cmd_question
-  Output: O primeiro argumento de read.table é o nome do arquivo texto a importar. Você pode escrever neste argumento um link para um arquivo na internet. A maioria das funções que leem arquivos permite isso. Experimente. Escreva plants <- read.table(url1, header=TRUE, sep=",", na.strings="")
+  Output: El primer argumento de read.table es el nombre del fichero de texto a importar. En este argumento puede escribir un enlace a un fichero de Internet. La mayoría de las funciones que leen ficheros lo permiten. Intentalo:  plants <- read.table(url1, header=TRUE, sep=",", na.strings="")
   CorrectAnswer: plants <- read.table(url1, header=TRUE, sep=",", na.strings="")
   AnswerTests: omnitest(correctExpr='plants <- read.table(url1, header=TRUE, sep=",", na.strings="")')
-  Hint: Certifique-se que tem um objeto url1 em sua área de trabalho, com a url para o arquivo. Então digite o comando e aperte ENTER
+  Hint: Asegúrate de tener un objeto url1 en tu espacio de trabajo, con la url al archivo. A continuación, escriba el comando y pulse ENTER.
 
 - Class: text
-  Output: 'Este é um arquivo do tipo csv (comma separated values), um
-  padrão de dados tabulares em texto que a maioria dos programas pode
-  criar. R incluye un conjunto de funciones que llaman a read.table()
+  Output: 'Se trata de un archivo csv (valores separados por comas), un estándar de datos de texto tabular que pueden crear la mayoría de los programas. R incluye un conjunto de funciones que llaman a read.table()
   con diferentes opciones por defecto para valores como sep y header,
   y algunos otros. En la mayoría de los casos encontrarás que puedes
   usar read.csv() para archivos separados por comas o read.delim()
@@ -94,13 +92,13 @@
   Hint: Ingresa plants <- read.csv("usda_plant_data.csv", na.strings="")
 
 - Class: cmd_question
-  Output: Todas esas maneras de importación crean el objeto 'plants' en su espacio de trabajo. En Rstudio, você verá o objeto na janela de ambiente de trabajo (environment). Escriba ls() para listar las variables en el espacio de trabajo, entre los cuales debe aparecer plants.
+  Output: Todas esas maneras de importación crean el objeto 'plants' en su espacio de trabajo. En Rstudio, verá el objeto en la ventana del entorno de trabajo. Escriba ls() para listar las variables en el espacio de trabajo, entre los cuales debe aparecer plants.
   CorrectAnswer: ls()
   AnswerTests: omnitest(correctExpr='ls()')
   Hint: Utilice el comando ls() para desplegar las variables creadas en el espacio de trabajo.
 
 - Class: text
-  Output: No RStudio você pode fazer a importação de dados pelo menu File > Import Dataset. Mas manter em seu código os comandos de importação de dados, torna as suas análises reproduzíveis.
+  Output: En RStudio puede importar datos a través del menú F|iles > Import data sets. Pero mantener los comandos de importación de datos en su código hace que sus análisis sean reproducibles.
 
 - Class: text
   Output: Cada vez que usted está trabajando con un nuevo conjunto de datos, lo primero que debe hacer es mirarlo! ¿Cuál es el formato de los datos? ¿Cuáles son las dimensiones? ¿Cuáles son los nombres de las variables? ¿Cómo se almacenan las variables? ¿Existen datos que faltan? ¿Hay errores en los datos?
@@ -139,16 +137,16 @@
   Output: Ahora que sabemos forma y tamaño del conjunto de datos, vamos a tener una idea de lo que hay dentro. names(plants) devolverá un vector de caracteres con los nombres de las columnas (es decir, variables). Inténtalo.
   CorrectAnswer: names(plants)
   AnswerTests: omnitest(correctExpr='names(plants)')
-  Hint: names(plants) volvera un vector carácter de nombres de columna (es decir, variables).
+  Hint: names(plants) devuelve un vector carácter de nombres de columna (es decir, variables).
 
 - Class: text
-  Output: "Os nomes das variáveis são bastante descritivos. A função read.table substitui espaços e caracteres que não são letras por ponto. Mas isso criou alguns nomes estranhos, como 'Temperature..Minimum...F.', convertido de 'Temperature, Minimum (°F)'. Uma maneira simples de corrigir isso é usar a própria função names para atribuir um novo nome a uma ou mais variáveis."  
+  Output: "Los nombres de las variables son muy descriptivos. La función read.table sustituye los espacios y los caracteres que no son letras en los nombres de las variables por puntos. Pero esto ha creado algunos nombres raros, como 'Temperatura..Mínima...F.', convertido a 'Temperatura, Mínima (°F)'. Una forma sencilla de solucionarlo es utilizar la propia función names para asignar un nuevo nombre a una o varias variables."  
 
 - Class: cmd_question
   Output: El comando names(plants)[12] devuelve el decimo segundo elemento del vector de nombres de variables. Intentálo.
   CorrectAnswer: names(plants)[12]
   AnswerTests: omnitest(correctExpr='names(plants)[12]')
-  Hint: names(plants)[12] volverá el nombre de la 12a variable.
+  Hint: names(plants)[12] devuelve el nombre de la 12a variable.
 
 - Class: cmd_question
   Output: El comando names(plants)[12] <- "Temperature.Minimum.F" cambia el nombre de la variable. Intentálo.
@@ -166,7 +164,7 @@
   Output: Si hay muchas variables para cambiar nombres hay otras maneras mas faciles para hacerlo. Pero todas utilizan la asignación función names.
 
 - Class: cmd_question
-  Output: read.table importa variáveis não numéricas como tipo 'character'. Se você vai usar alguma delas como variáveis categóricas em suas análises, é importante que as converta para fatores. Faça isso para a variável de tolerância à sombra com o comando plants$Shade.Tolerance <- factor(plants$Shade.Tolerance) 
+  Output: read.table importa variables no numéricas de tipo 'carácter'. Si va a utilizar alguna de ellas como variable categórica en sus análisis, es importante convertirlas en factores. Hágalo para la variable tolerancia a la sombra con el comando plantas$Tolerancia.sombra <- factor(plantas$Tolerancia.sombra).
   CorrectAnswer: plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)
   AnswerTests: omnitest(correctExpr='plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)')
   Hint: Ingrese plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)
@@ -211,7 +209,7 @@
   Output: summary() proporciona una salida diferente para cada variable, dependiendo de su clase. Para los datos numéricos, summary() muestra el mínimo, primer cuartil, la mediana, la media, el tercer cuartil, y el máximo. Estos valores nos ayudan a entender cómo se distribuyen los datos.
 
 - Class: text
-  Output: Para los factores (variables categóricas), summary() muestra el número de veces que cada valor (o "nivel") se produce en los datos. Por ejemplo, cada el resumen de Shade.Tolerance nos dice que nuestro conjunto de datos contiene 246 plantas tolerantes, 349 no tolerantes, etc.
+  Output: Para los factores (variables categóricas), summary() muestra el número de veces que cada valor (o "nivel") se produce en los datos. Por ejemplo, el resumen de Shade.Tolerance nos dice que nuestro conjunto de datos contiene 246 plantas tolerantes, 349 no tolerantes, etc.
 
 - Class: cmd_question
   Output: Se puede ver que R trunca el resumen para Active.Growth.Period incluyendo una nueva categoría denominada "Other". Dado que es una variable categórica / Factor, podemos ver cuántas veces cada valor realmente ocurre en los datos con table(plants$Active.Growth.Period).

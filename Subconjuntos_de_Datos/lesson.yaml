@@ -334,16 +334,16 @@
   AnswerTests: omnitest(correctExpr='cars$speed[cars$dist>100]')
 
 - Class: cmd_question
-  Output: 'Como dataframes são objetos tabulares, se pode usar a indexação numérica similar a de matrizes. Digite cars[1:5,] para ver as 5 primeiras linhas e todas as colunas do dataframe'
+  Output: 'Como los dataframes son objetos tabulares, puedes utilizar una indexación numérica similar a la de las matrices. Escriba cars[1:5,] para ver las 5 primeras filas y todas las columnas del dataframe.'
   CorrectAnswer: cars[1:5,]
   AnswerTests: omnitest(correctExpr='cars[1:5,]')
   Hint: Ingresa cars[1:5,] y pulsa intro.
 
 - Class: cmd_question
-  Output: 'Agora mostre o dataframe cars apenas com as linhas que tenham distância de frenagem maior que a distância média no conjunto de dados. Mostre todas as colunas do dataframe'
+  Output: 'Ahora muestre el dataframe cars con sólo las filas que tienen una distancia de frenado mayor que la distancia media del conjunto de datos. Muestra todas las columnas del marco de datos'
   CorrectAnswer: cars[cars$dist>mean(car$dist),]
   AnswerTests: omnitest('cars[cars$dist>mean(car$dist),]')
   Hint: La prueba logica que debes utilizar en la indexación de las lineas es cars$dist>mean(car$dist).
 
 - Class: text
-  Output: 'Ahora ya sabes cómo acceder a las estructuras de datos.'
+  Output: 'Has terminado esa lección. Ahora ya sabes cómo acceder a las estructuras de datos.'
