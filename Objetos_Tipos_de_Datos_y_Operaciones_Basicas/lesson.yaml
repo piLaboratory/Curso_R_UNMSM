@@ -7,7 +7,7 @@
   Version: 1.0.0
 
 - Class: text
-  Output: "Esta lección es una versión ligeramente modificada de la lección del mismo nombre del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r)"
+  Output: "Esta lección es una versión ligeramente modificada de la lección del mismo nombre del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r)."
 
 - Class: text
   Output: 'En esta lección conocerás los tipos de datos que existen en el

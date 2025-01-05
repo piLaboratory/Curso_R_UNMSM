@@ -7,7 +7,7 @@
   Version: 1.0.0
 
 - Class: text
-  Output: "Esta lección es una combinación con modificaciones de las lecciones 'Leer y Escribir Datos'  del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r)", y del curso 'R Programming' traducida al castellano por José R Sosa (https://github.com/josersosa/Programando_en_R).
+  Output: "Esta lección es una combinación con modificaciones de las lecciones 'Leer y Escribir Datos'  del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r), y del curso 'R Programming' traducida al castellano por José R Sosa (https://github.com/josersosa/Programando_en_R)."
 
 - Class: text
   Output: En esta lección aprenderemos a leer conjuntos de datos en R. También aprenderemos a realizar una primera inspección de los datos.
@@ -26,7 +26,7 @@
   Output: Ahora descargue el archivo en su directorio de trabajo con download.file(url = url1, destfile = "usda_plant_data.csv") 
   CorrectAnswer: download.file(url = url1, destfile = "usda_plant_data.csv") 
   AnswerTests: omnitest(correctExpr='download.file(url = url1, destfile = "usda_plant_data.csv")')
-  Hint: Copia download.file(url = url1, destfile = "usda_plant_data.csv")  y pégalo en la línea de comando.
+  Hint: Copia download.file(url = url1, destfile = "usda_plant_data.csv") y pégalo en la línea de comando.
 
 - Class: text
   Output: 'La mayoría de los archivos que contienen información tienen un
@@ -50,12 +50,12 @@
   Hint: Escriba file.edit("usda_plant_data.csv") en la linea de comando y pulse intro.
 
 - Class: text
-  Output: RStudio debe abrir el archivo en la ventana del editor de archivos, que normalmente está encima de la ventana de la consola de R. Podemos ver que el valor de cada campo está encerrado entre comillas dobles.
+  Output: 'RStudio debe abrir el archivo en la ventana del editor de archivos, que normalmente está encima de la ventana de la consola de R. Podemos ver que el valor de cada campo está encerrado entre comillas dobles. Vemos también que los valores faltantes están como dos comillas dobles en secuencia ("").'
 
 - Class: mult_question
   Output: ¿Cuál es el delimitador de campo en este archivo?
-  AnswerChoices: Coma;punto y coma;punto;espacio
-  CorrectAnswer: Coma
+  AnswerChoices: coma;punto y coma;punto;espacio
+  CorrectAnswer: coma
   AnswerTests: omnitest(correctVal='coma')
   Hint: Mira lo que hay entre los campos de valores.
 
@@ -66,17 +66,44 @@
   AnswerTests: omnitest(correctVal='nombres de variables')
   Hint: Compare los campos de la primera línea con los de las líneas siguientes.
 
-- Class: text
-  Output: Cada vez que usted está trabajando con un nuevo conjunto de datos, lo primero que debe hacer es mirarlo! ¿Cuál es el formato de los datos? ¿Cuáles son las dimensiones? ¿Cuáles son los nombres de las variables? ¿Cómo se almacenan las variables? ¿Existen datos que faltan? ¿Hay errores en los datos?
-
-- Class: text
-  Output: Esta lección le enseñará cómo responder a estas preguntas y más sobre uso funciones incorporadas de R. Vamos a estar usando un conjunto de datos construido a partir de la base de datos del Departamento de Plantas Agrícolas de los Estados Unidos (http://plants.usda.gov/adv_search.html).
+- Class: cmd_question
+  Output: Agora já sabemos o que precisamos para importar o arquivo para o R. A função para fazer isso é read.table. é uma função com muitos argumentos, o que confere muita flexibilidade para ler diferentes tipos de dados. Em nosso caso precisamos especificar que el primer renglón contiene los nombres de la columnas (header=TRUE) y sep para especificar el delimitador (sep=","). Ingresa plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings = "") 
+  CorrectAnswer: plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings="")
+  AnswerTests: omnitest(correctExpr='plants <- read.table("usda_plant_data.csv", header=TRUE, sep=",", na.strings="")')
+  Hint: Ingresa plants <- read.table("usda_plant_data.csv", header=TRUE, sep="," , na.strings="")  y pulse intro.
 
 - Class: cmd_question
-  Output: He almacenado los datos para usted en una variable llamada plants. Escriba ls() para listar las variables en el espacio de trabajo, entre los cuales debe aparecer plants.
+  Output: O primeiro argumento de read.table é o nome do arquivo texto a importar. Você pode escrever neste argumento um link para um arquivo na internet. A maioria das funções que leem arquivos permite isso. Experimente. Escreva plants <- read.table(url1, header=TRUE, sep=",", na.strings="")
+  CorrectAnswer: plants <- read.table(url1, header=TRUE, sep=",", na.strings="")
+  AnswerTests: omnitest(correctExpr='plants <- read.table(url1, header=TRUE, sep=",", na.strings="")')
+  Hint: Certifique-se que tem um objeto url1 em sua área de trabalho, com a url para o arquivo. Então digite o comando e aperte ENTER
+
+- Class: text
+  Output: 'Este é um arquivo do tipo csv (comma separated values), um
+  padrão de dados tabulares em texto que a maioria dos programas pode
+  criar. R incluye un conjunto de funciones que llaman a read.table()
+  con diferentes opciones por defecto para valores como sep y header,
+  y algunos otros. En la mayoría de los casos encontrarás que puedes
+  usar read.csv() para archivos separados por comas o read.delim()
+  para archivos delimitados por TAB sin especificar otras opciones.'
+
+- Class: cmd_question
+  Output: Intenta importar el archivo con read.csv, sin informar los argumentos header y sep.
+  CorrectAnswer: plants <- read.csv("usda_plant_data.csv", na.strings="")
+  AnswerTests: omnitest(correctExpr='plants <- read.csv("usda_plant_data.csv", na.strings="")')
+  Hint: Ingresa plants <- read.csv("usda_plant_data.csv", na.strings="")
+
+- Class: cmd_question
+  Output: Todas esas maneras de importación crean el objeto 'plants' en su espacio de trabajo. En Rstudio, você verá o objeto na janela de ambiente de trabajo (environment). Escriba ls() para listar las variables en el espacio de trabajo, entre los cuales debe aparecer plants.
   CorrectAnswer: ls()
   AnswerTests: omnitest(correctExpr='ls()')
   Hint: Utilice el comando ls() para desplegar las variables creadas en el espacio de trabajo.
+
+- Class: text
+  Output: No RStudio você pode fazer a importação de dados pelo menu File > Import Dataset. Mas manter em seu código os comandos de importação de dados, torna as suas análises reproduzíveis.
+
+- Class: text
+  Output: Cada vez que usted está trabajando con un nuevo conjunto de datos, lo primero que debe hacer es mirarlo! ¿Cuál es el formato de los datos? ¿Cuáles son las dimensiones? ¿Cuáles son los nombres de las variables? ¿Cómo se almacenan las variables? ¿Existen datos que faltan? ¿Hay errores en los datos?
 
 - Class: cmd_question
   Output: Empecemos por por verificar la clase de la variable plants con class(plants). Esto nos dará una idea de la estructura general de los datos.
@@ -85,7 +112,7 @@
   Hint: Utilice la class(plants) para comprobar la clase de la variable plants.
 
 - Class: text
-  Output: Es muy común que los datos se almacenen en una trama de datos (data.frame). Esta es la clase predeterminada para los datos leídos en R utilizando funciones como read.csv() y read.table(), sobre las cuales aprenderemos en otra lección.
+  Output: Es muy común que los datos se almacenen en una trama de datos (clase data.frame). Esta es la clase predeterminada para los datos leídos en R utilizando funciones como read.csv() y read.table().
 
 - Class: cmd_question
   Output: Dado que el conjunto de datos se almacena en una trama de datos, sabemos que debe ser es rectangular. En otras palabras, tiene dos dimensiones (filas y columnas) y encaja perfectamente en una tabla u hoja de cálculo. Utilice dim(plants) para ver exactamente con cuántas filas y columnas estamos tratando.
@@ -94,7 +121,7 @@
   Hint: Utilice dim(plants) para ver las dimensiones exactas del conjunto de datos de las plants.
 
 - Class: text
-  Output: El primer número que se ve (5166) es el número de filas (observaciones) y el segundo número (10) es el número de columnas (variables). 
+  Output: El primer número que se ve (5166) es el número de filas (observaciones) y el segundo número (12) es el número de columnas (variables). 
 
 - Class: cmd_question
   Output: También puede utilizar nrow(plants) para ver sólo el número de filas. Inténtalo.
@@ -109,18 +136,49 @@
   Hint: Utilice ncol(plants) para ver sólo el número de columnas.
 
 - Class: cmd_question
-  Output: Si usted es curioso en cuanto a la cantidad de espacio del conjunto de datos está ocupando en la memoria, puede utilizar object.size(plants).
-  AnswerTests: omnitest(correctExpr='object.size(plants)')
-  Hint: object.size(plants) le dirá la cantidad de memoria ocupada por la trama de datos plants.
-
-- Class: cmd_question
-  Output: Ahora que sabemos forma y tamaño del conjunto de datos, vamos a tener una idea de lo que hay dentro. names(plants) devolverá un vector de caracteres con los nombres de las columnas (es decir, variables). Intentalo.
+  Output: Ahora que sabemos forma y tamaño del conjunto de datos, vamos a tener una idea de lo que hay dentro. names(plants) devolverá un vector de caracteres con los nombres de las columnas (es decir, variables). Inténtalo.
   CorrectAnswer: names(plants)
   AnswerTests: omnitest(correctExpr='names(plants)')
-  Hint: names(plants) volverán un vector carácter de nombres de columna (es decir, variables).
+  Hint: names(plants) volvera un vector carácter de nombres de columna (es decir, variables).
 
 - Class: text
-  Output: Hemos aplicado unos nombres de variables bastante descriptivos para este conjunto de datos, pero no siempre será así. Un siguiente paso lógico es dar un vistazo a los datos reales. Sin embargo, nuestra base de datos contiene más de 5.000 observaciones (filas), así que es poco práctico ver toda la tabla a la vez.
+  Output: "Os nomes das variáveis são bastante descritivos. A função read.table substitui espaços e caracteres que não são letras por ponto. Mas isso criou alguns nomes estranhos, como 'Temperature..Minimum...F.', convertido de 'Temperature, Minimum (°F)'. Uma maneira simples de corrigir isso é usar a própria função names para atribuir um novo nome a uma ou mais variáveis."  
+
+- Class: cmd_question
+  Output: El comando names(plants)[12] devuelve el decimo segundo elemento del vector de nombres de variables. Intentálo.
+  CorrectAnswer: names(plants)[12]
+  AnswerTests: omnitest(correctExpr='names(plants)[12]')
+  Hint: names(plants)[12] volverá el nombre de la 12a variable.
+
+- Class: cmd_question
+  Output: El comando names(plants)[12] <- "Temperature.Minimum.F" cambia el nombre de la variable. Intentálo.
+  CorrectAnswer: names(plants)[12] <- "Temperature.Minimum.F"
+  AnswerTests: omnitest(correctExpr='names(plants)[12] <- "Temperature.Minimum.F"')
+  Hint: names(plants)[12] <- "Temperature.Minimum.F" cambia el nombre de la 12a variable.
+
+- Class: cmd_question
+  Output: "Ahora cambie el nombre de la variable 'Precipitation..Minimum.' para 'Precipitation.Minimum'"
+  CorrectAnswer: names(plants)[9] <- "Precipitation.Minimum"
+  AnswerTests: omnitest(correctExpr='names(plants)[9] <- "Precipitation.Minimum"')
+  Hint: Ingresa names(plants)[9] <- "Precipitation.Minimum"
+  
+- Class: text
+  Output: Si hay muchas variables para cambiar nombres hay otras maneras mas faciles para hacerlo. Pero todas utilizan la asignación función names.
+
+- Class: cmd_question
+  Output: read.table importa variáveis não numéricas como tipo 'character'. Se você vai usar alguma delas como variáveis categóricas em suas análises, é importante que as converta para fatores. Faça isso para a variável de tolerância à sombra com o comando plants$Shade.Tolerance <- factor(plants$Shade.Tolerance) 
+  CorrectAnswer: plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)
+  AnswerTests: omnitest(correctExpr='plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)')
+  Hint: Ingrese plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)
+
+- Class: cmd_question
+  Output: Converta la variable Active.Growth.Period en factor. 
+  CorrectAnswer: plants$Active.Growth.Period <- factor(plants$Active.Growth.Period) 
+  AnswerTests: omnitest(correctExpr='plants$Active.Growth.Period <- factor(plants$Active.Growth.Period)')
+  Hint: plants$Active.Growth.Period <- factor(plants$Active.Growth.Period) converte la variable en factor.
+
+- Class: text
+  Output: Ahora vamos a dar un vistazo a los datos. Sin embargo, nuestra base de datos contiene más de 5.000 observaciones (filas), así que es poco práctico ver toda la tabla a la vez.
   
 - Class: cmd_question
   Output: La función head() le permite hacer una vista previa de la parte superior del conjunto de datos. Dese la oportunidad con un solo argumento.
@@ -129,7 +187,7 @@
   Hint: head(plants) le mostrará la parte superior del conjunto de datos.
 
 - Class: text
-  Output: Tome un minuto para mirar el resultado y entender la salida anterior. Cada fila se etiqueta con el número de observación y cada columna con el nombre de la variable. Es probable que su pantalla no sea lo suficientemente amplia como para ver las 10 columnas de lado a lado, en cuyo caso R muestra tantas columnas como pueda en cada línea antes de continuar al siguiente.
+  Output: Tome un minuto para mirar el resultado y entender la salida anterior. Cada fila se etiqueta con el número de observación y cada columna con el nombre de la variable. Es probable que su pantalla no sea lo suficientemente amplia como para ver las 12 columnas de lado a lado, en cuyo caso R muestra tantas columnas como pueda en cada línea antes de continuar al siguiente.
 
 - Class: cmd_question
   Output: Por defecto, la función head() muestra las primeras seis filas de los datos. Puede modificar este comportamiento al pasar como segundo argumento el número de filas que desea ver. Use la head() para obtener una vista previa de las primeras 10 filas de plantas.
@@ -150,16 +208,16 @@
   Hint: Pruebe summary(plants) para ver cómo se distribuye cada variable y cuantos valores perdidos tiene nuestra base de datos.
 
 - Class: text
-  Output: summary() proporciona una salida diferente para cada variable, dependiendo de su clase. Para los datos numéricos como Precip_Min, summary() muestra el mínimo, primer cuartil, la mediana, la media, el tercer cuartil, y el máximo. Estos valores nos ayudan a entender cómo se distribuyen los datos.
+  Output: summary() proporciona una salida diferente para cada variable, dependiendo de su clase. Para los datos numéricos, summary() muestra el mínimo, primer cuartil, la mediana, la media, el tercer cuartil, y el máximo. Estos valores nos ayudan a entender cómo se distribuyen los datos.
 
 - Class: text
-  Output: Para las variables categóricas (llamadas variables "factor" en R), summary() muestra el número de veces que cada valor (o "nivel") se produce en los datos. Por ejemplo, cada valor de Scientific_Name sólo aparece una vez, ya que es única para una planta específica. Por el contrario, el resumen de Duration (también una variable de factor) nos dice que nuestro conjunto de datos contiene 3031 plantas perennes, 682 plantas anuales, etc.
+  Output: Para los factores (variables categóricas), summary() muestra el número de veces que cada valor (o "nivel") se produce en los datos. Por ejemplo, cada el resumen de Shade.Tolerance nos dice que nuestro conjunto de datos contiene 246 plantas tolerantes, 349 no tolerantes, etc.
 
 - Class: cmd_question
-  Output: Se puede ver que R trunca el resumen para Active_Growth_Period incluyendo una nueva categoría denominada "Other". Dado que es una variable categórica / Factor, podemos ver cuántas veces cada valor realmente ocurre en los datos con table(plants$Active_Growth_Period).
-  CorrectAnswer: table(plants$Active_Growth_Period)
-  AnswerTests: omnitest(correctExpr='table(plants$Active_Growth_Period)')
-  Hint: table(plants$Active_Growth_Period) mostrará los recuentos para cada nivel de la variable de factor.
+  Output: Se puede ver que R trunca el resumen para Active.Growth.Period incluyendo una nueva categoría denominada "Other". Dado que es una variable categórica / Factor, podemos ver cuántas veces cada valor realmente ocurre en los datos con table(plants$Active.Growth.Period).
+  CorrectAnswer: table(plants$Active.Growth.Period)
+  AnswerTests: omnitest(correctExpr='table(plants$Active.Growth.Period)')
+  Hint: table(plants$Active.Growth.Period) mostrará los recuentos para cada nivel de la variable de factor.
 
 - Class: text
   Output: Cada una de las funciones que hemos introducido hasta el momento tiene su utilidad para ayudar a entender mejor la estructura de los datos. Sin embargo, hemos dejado lo mejor para lo último ...
@@ -171,12 +229,21 @@
   Hint: Utilice str(plants) para observar la estructura de sus datos.
 
 - Class: text
-  Output: La belleza de str() es que combina muchas de las características de las otras funciones que ya has visto, todo ello en un formato conciso y fácil de leer. En la parte superior, se nos dice que la clase de las plantas es 'data.frame' y que cuenta con 5166 observaciones y 10 variables. A continuación, nos da el nombre y la categoría de cada variable, así como una vista previa de su contenido.
+  Output: La belleza de str() es que combina muchas de las características de las otras funciones que ya has visto, todo ello en un formato conciso y fácil de leer. En la parte superior, se nos dice que la clase de las plantas es 'data.frame' y que cuenta con 5166 observaciones y 12 variables. A continuación, nos da el nombre y la categoría de cada variable, así como una vista previa de su contenido.
 
 - Class: text
   Output: str() es en realidad una función muy general que se puede utilizar en la mayoría de los objetos en R. Cada vez que usted quiere entender la estructura de algo (un conjunto de datos, función, etc.), str() es un buen modo para comenzar.
 
+- Class: cmd_question
+  Output: Y claro, pudes mirar todo los datos con View(plants). Inténtalo.
+  CorrectAnswer: View(plants)
+  AnswerTests: omnitest(correctExpr='View(plants)')
+  Hint: Utilice View(plants) para visualización de la trama de datos.
+
 - Class: text
-  Output: En esta lección, ha aprendido a tener una idea de la estructura y contenido de un nuevo conjunto de datos utilizando una colección de funciones simples y útiles. Tomarse el tiempo para hacer esto por adelantado puede ahorrarle tiempo y frustración más tarde durante su análisis.
+  Output: En Rstudio, ese comando abre la visualización de los datos en la ventana de script. Da lo mismo si haces clic en el nombre del objeto en la ventana de ambiente de trabajo (Environment).
+
+- Class: text
+  Output: En esta lección, ha aprendido a cargar datos a R y a tener una idea de la estructura y contenido de un nuevo conjunto de datos utilizando una colección de funciones simples y útiles. Tomarse el tiempo para hacer esto por adelantado puede ahorrarle tiempo y frustración más tarde durante su análisis.
 
 

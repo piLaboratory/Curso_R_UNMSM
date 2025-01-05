@@ -1,11 +1,14 @@
 - Class: meta
-  Course: programacion-estadistica-r
+  Course: Análisis y visualización de datos biológicos con R
   Lesson: Subconjuntos de Datos
-  Author: Ismael Fernández
+  Author: Ismael Fernández, con pequenos cambios de Paulo Inácio Prado
   Type: Standard
-  Organization: Universidad Nacional Autónoma de México
-  Version: 2.2.21
+  Organization: Universidad Nacional Autónoma de México y Universidade de São Paulo
+  Version: 2.2.3
 
+- Class: text
+  Output: "Esta lección es una versión un poco modificada de la lección del mismo nombre del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r)."
+  
 - Class: text
   Output: 'En esta lección conocerás las maneras de acceder a las estructuras de
   datos en el lenguaje R.'
@@ -82,7 +85,7 @@
 
 - Class: text
   Output: 'La notación [[]] funciona de la misma manera que la notación [] en
-  este caso.'
+  este caso. Veras que es diferente para listas.'
 
 - Class: cmd_question
   Output: "También puedes usar enteros negativos para obtener un vector que
@@ -146,9 +149,9 @@
 - Class:  cmd_question
   Output: "Para crear un arreglo de dimensión 3x3x2 y de contenido los números
   del 1 al 18 y guardarlo en la variable 'mi_arreglo', ingresa mi_arreglo <-
-  array(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),dim=c(3,3,2)) en la
+  array(1:18,dim=c(3,3,2)) en la
   línea de comandos."
-  CorrectAnswer: mi_arreglo <- array(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),dim=c(3,3,2))
+  CorrectAnswer: mi_arreglo <- array((1:18,dim=c(3,3,2))
   AnswerTests: any_of_exprs('mi_arreglo <- array(c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18),dim=c(3,3,2))', 'mi_arreglo <- array(1:18,dim=c(3,3,2))', 'mi_arreglo <- array(c(1:18),dim=c(3,3,2))')
 
 - Class:  cmd_question
@@ -171,7 +174,7 @@
 
 - Class: cmd_question
   Output: "Una matriz es simplemente un arreglo bidimensional. Ahora crea una
-  matriz con 3 renglones y 3 columnas con los números enteros del 1 al 9 y
+  matriz con 3 filas y 3 columnas con los números enteros del 1 al 9 y
   guárdala en la variable 'mi_matriz'."
   CorrectAnswer: mi_matriz <- matrix(data=1:9,nrow=3,ncol=3)
   AnswerTests: any_of_exprs('mi_matriz <- matrix(data=c(1:9),nrow=3,ncol=3)', 'mi_matriz <- matrix(data=1:9,nrow=3,ncol=3)', 'mi_matriz <- matrix(data=c(1, 2, 3, 4, 5, 6, 7, 8, 9),nrow=3,ncol=3)')
@@ -179,11 +182,11 @@
   comandos."
 
 - Class: text
-  Output: 'Al igual que con los arreglos, para obtener todos los renglones o
+  Output: 'Al igual que con los arreglos, para obtener todas las filas o
   columnas de una dimensión de una matriz, simplemente omite los índices.'
 
 - Class:  cmd_question
-  Output: "Por ejemplo, si quisiéras solo el primer renglón de 'mi_matriz',
+  Output: "Por ejemplo, si quisiéras solo la primer fila de 'mi_matriz',
   basta con ingresar mi_matriz[1,] en la línea de comandos. ¡Inténtalo!"
   CorrectAnswer: mi_matriz[1,]
   AnswerTests: omnitest(correctExpr='mi_matriz[1,]')
@@ -196,13 +199,13 @@
   Hint: "Ingresa mi_matriz[,1] en la línea de comandos."
 
 - Class:  cmd_question
-  Output: 'También puedes referirte a un rango de renglones. Ingresa
+  Output: 'También puedes referirte a un rango de filas. Ingresa
   mi_matriz[2:3,] en la línea de comandos.'
   CorrectAnswer: mi_matriz[2:3,]
   AnswerTests: omnitest(correctExpr='mi_matriz[2:3,]')
 
 - Class:  cmd_question
-  Output: 'O referirte a un conjunto no contiguo de renglones. Ingresa
+  Output: 'O referirte a un conjunto no contiguo de filas. Ingresa
   mi_matriz[c(1,3),] en la línea de comandos.'
   CorrectAnswer: mi_matriz[c(1,3),]
   AnswerTests: omnitest(correctExpr='mi_matriz[c(1,3),]')
@@ -227,10 +230,13 @@
   CorrectAnswer: carro <- list(color="rojo", nllantas=4, marca= "Renault", ncilindros=4)
   AnswerTests: omnitest(correctExpr='carro <- list(color="rojo", nllantas=4, marca= "Renault", ncilindros=4)')
 
-- Class: text
+- Class: cmd_question
   Output: 'Tú puedes acceder a los elementos de una lista de múltiples formas.
-  Puedes usar la misma notación que usaste con los vectores.'
-
+  Puedes usar la misma notación que usaste con los vectores. Intenta ahora acceder al primero elemento de la lista carro'
+  CorrectAnswer: carro[1]
+  AnswerTests: omnitest(correctExpr='carro[1]')
+  Hint: carro[1] te muestra la lista carro solamente con su primero elemento
+  
 - Class:  cmd_question
   Output: 'Y además puedes indexar un elemento por nombre usando la notación $.
   Por ejemplo, ingresa carro$color en la línea de comandos.'
@@ -327,13 +333,17 @@
   CorrectAnswer: cars$speed[cars$dist>100]
   AnswerTests: omnitest(correctExpr='cars$speed[cars$dist>100]')
 
+- Class: cmd_question
+  Output: 'Como dataframes são objetos tabulares, se pode usar a indexação numérica similar a de matrizes. Digite cars[1:5,] para ver as 5 primeiras linhas e todas as colunas do dataframe'
+  CorrectAnswer: cars[1:5,]
+  AnswerTests: omnitest(correctExpr='cars[1:5,]')
+  Hint: Ingresa cars[1:5,] y pulsa intro.
+
+- Class: cmd_question
+  Output: 'Agora mostre o dataframe cars apenas com as linhas que tenham distância de frenagem maior que a distância média no conjunto de dados. Mostre todas as colunas do dataframe'
+  CorrectAnswer: cars[cars$dist>mean(car$dist),]
+  AnswerTests: omnitest('cars[cars$dist>mean(car$dist),]')
+  Hint: La prueba logica que debes utilizar en la indexación de las lineas es cars$dist>mean(car$dist).
+
 - Class: text
   Output: 'Ahora ya sabes cómo acceder a las estructuras de datos.'
-
-- Class: mult_question
-  Output: "Has concluido la lección. ¿Te gustaría que se le notificará a
-  Coursera que has completado esta lección?"
-  CorrectAnswer: NULL
-  AnswerChoices: Si;No
-  AnswerTests: coursera_on_demand()
-  Hint: ""
