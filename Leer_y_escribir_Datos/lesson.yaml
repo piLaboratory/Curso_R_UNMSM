@@ -64,7 +64,7 @@
   AnswerChoices: datos;nombres de variables;nombre del fichero
   CorrectAnswer: nombres de variables
   AnswerTests: omnitest(correctVal='nombres de variables')
-  Hint: Mira lo esta entre los campos de valores.
+  Hint: Compare los campos de la primera línea con los de las líneas siguientes.
 
 - Class: text
   Output: Cada vez que usted está trabajando con un nuevo conjunto de datos, lo primero que debe hacer es mirarlo! ¿Cuál es el formato de los datos? ¿Cuáles son las dimensiones? ¿Cuáles son los nombres de las variables? ¿Cómo se almacenan las variables? ¿Existen datos que faltan? ¿Hay errores en los datos?
