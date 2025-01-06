@@ -459,7 +459,7 @@
 - Class: cmd_question
   Output: 'Con la funcción rownames se puede cambiar los nombres de las filas. Introduce
   rownames(ab) <- c("Haití", "Peru", "Estados Unidos", "Brasil") en la línea de comando.'
-  CorrectAnswer: rownames(ab) <- c("Haití", "Peru", "Estados Unidos", "Brasil")
+  CorrectAnswer: rownames(ab) <- c("Haití", "Perú", "Estados Unidos", "Brasil")
   AnswerTests: omnitest(correctExpr= 'rownames(ab) <- c("Haití", "Peru", "Estados Unidos", "Brasil")')
   Hint: 'Introduce rownames(ab) <- c("Haití", "Perú", "Estados Unidos", "Brasil") en la línea de comandos.'
 
