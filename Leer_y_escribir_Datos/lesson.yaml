@@ -163,7 +163,7 @@
   Output: Si hay muchas variables para cambiar nombres hay otras maneras mas faciles para hacerlo. Pero todas utilizan la asignación función names.
 
 - Class: cmd_question
-  Output: "read.table importa variables no numéricas de tipo 'carácter'. Si va a utilizar alguna de ellas como variable categórica en sus análisis, es importante convertirlas en factores. Hágalo para la variable tolerancia a la sombra con el comando plantas$Tolerancia.sombra <- factor(plantas$Tolerancia.sombra)."
+  Output: "read.table importa variables no numéricas de tipo 'carácter'. Si va a utilizar alguna de ellas como variable categórica en sus análisis, es importante convertirlas en factores. Hágalo para la variable tolerancia a la sombra con el comando plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)."
   CorrectAnswer: plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)
   AnswerTests: omnitest(correctExpr='plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)')
   Hint: Ingrese plants$Shade.Tolerance <- factor(plants$Shade.Tolerance)
@@ -232,7 +232,7 @@
   Output: "str() es en realidad una función muy general que se puede utilizar en la mayoría de los objetos en R. Cada vez que usted quiere entender la estructura de algo (un conjunto de datos, función, etc.), str() es un buen modo para comenzar."
 
 - Class: cmd_question
-  Output: Y claro, pudes mirar todo los datos con View(plants). Inténtalo.
+  Output: Y claro, puedes mirar todos los datos con View(plants). Inténtalo.
   CorrectAnswer: View(plants)
   AnswerTests: omnitest(correctExpr='View(plants)')
   Hint: Utilice View(plants) para visualización de la trama de datos.
