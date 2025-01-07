@@ -1,10 +1,10 @@
 - Class: meta
-  Course: Programando en R
+  Course: Análisis y visualización de datos biológicos con R
   Lesson: Funciones *apply
-  Author: Nick Carchedi
+  Author: Nick Carchedi, Ismael Fernández, con pequeños cambios de Paulo Inácio Prado
   Type: Standard
   Organization: JHU Biostat
-  Version: 2.2.11
+  Version: 2.2.12
 
 - Class: text
   Output: "Esta lección es una combinación con pocas modificaciones de las lecciones 'Funciones apply'  del curso 'Programación estadística en R', de Ismael Fernández, UNAM, México (https://github.com/ifunam/programacion-estadistica-r), y de la lección 'lapply y sapply' del curso 'R Programming' traducida al castellano por José R Sosa (https://github.com/josersosa/Programando_en_R)."
